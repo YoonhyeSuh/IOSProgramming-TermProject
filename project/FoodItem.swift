@@ -10,4 +10,6 @@ import Foundation
 struct FoodItem: Codable {
     let name: String
     let calories: Int
+    let mealTime: String
+    let imageUrl: String
 }
