@@ -7,6 +7,8 @@
 
 import Foundation
 
+//식단기록에 필요한 데이터 구조체
+
 struct FoodItem: Codable {
     let id: String
     let name: String

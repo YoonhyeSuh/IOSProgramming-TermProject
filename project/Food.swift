@@ -7,6 +7,8 @@
 
 import Foundation
 
+//음식검색에 필요한 데이터 구조체
+
 struct Food: Codable {
     
     let name: String
