@@ -68,24 +68,39 @@ class DietViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 
-
     
     func updateTotalCalories() {
         let totalCalories = foods.reduce(0) { $0 + (Int($1.calories) ?? 0) }
         caloriesLabel.text = "Total Calories: \(totalCalories)"
     }
     
-    // MARK: - UITableViewDataSource
+    //UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return foods.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FoodTableViewCell", for: indexPath) as? FoodTableViewCell else {
+            return UITableViewCell()
+        }
         let food = foods[indexPath.row]
-        cell.textLabel?.text = "\(food.name) - \(food.calories) kcal"
-        cell.detailTextLabel?.text = food.mealTime
+        cell.nameLabel.text = food.name
+        cell.caloriesLabel.text = food.calories
+        cell.mealTimeLabel.text = food.mealTime
+        
+        // 이미지 로드
+        if let url = URL(string: food.imageUrl) {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data, error == nil {
+                    DispatchQueue.main.async {
+                        cell.foodImageView.image = UIImage(data: data)
+                    }
+                }
+            }
+            task.resume()
+        }
+
         return cell
     }
     
