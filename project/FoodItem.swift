@@ -8,8 +8,9 @@
 import Foundation
 
 struct FoodItem: Codable {
+    let id: String
     let name: String
-    let calories: Int
+    let calories: String
     let mealTime: String
     let imageUrl: String
 }

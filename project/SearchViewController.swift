@@ -13,8 +13,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var foodItems: [FoodItem] = []
-    var filteredFoodItems: [FoodItem] = []
+    var foodItems: [Food] = []
+    var filteredFoodItems: [Food] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +31,16 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         if let items = loadJSON() {
             foodItems = items
             filteredFoodItems = items
+            tableView.reloadData() // 데이터 로드 후 테이블 뷰 리로드
         }
     }
     
-    func loadJSON() -> [FoodItem]? {
+    func loadJSON() -> [Food]? {
         if let url = Bundle.main.url(forResource: "Food", withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)
                 let decoder = JSONDecoder()
-                let foodItems = try decoder.decode([FoodItem].self, from: data)
+                let foodItems = try decoder.decode([Food].self, from: data)
                 return foodItems
             } catch {
                 print("Failed to load: \(error.localizedDescription)")

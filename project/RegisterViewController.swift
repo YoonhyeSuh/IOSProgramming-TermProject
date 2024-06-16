@@ -83,7 +83,7 @@ class RegisterViewController: UIViewController {
         addViews()
         applyConstraints()
         addTarget()
-        addBackButton()
+//        addBackButton()
     }
 
     // 뷰 추가 메서드
@@ -127,16 +127,16 @@ class RegisterViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
 
-    // 뒤로가기 버튼 추가 메서드
-    fileprivate func addBackButton() {
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(didTapBackButton(_:)))
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    // 뒤로가기 버튼 클릭 시 호출 메서드
-    @objc func didTapBackButton(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-    }
+//    // 뒤로가기 버튼 추가 메서드
+//    fileprivate func addBackButton() {
+//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(didTapBackButton(_:)))
+//        navigationItem.leftBarButtonItem = backButton
+//    }
+//
+//    // 뒤로가기 버튼 클릭 시 호출 메서드
+//    @objc func didTapBackButton(_ sender: UIBarButtonItem) {
+//        navigationController?.popViewController(animated: true)
+//    }
 
     // 텍스트 유효성 검사 메서드
     fileprivate func isValid(text: String, pattern: String) -> Bool {
